@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'homepage' %}
+
+    {% block body %}
+        <link rel="stylesheet" href="{{ asset('thom/css/dashy.css') }}" />
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="jumbotron">
+
+                    {#                    <i class="fa fa-cubes" style="font-size: 80px;"></i>#}
+                    <div id="dashboard"></div>
+                    {#                    <i class="fa fa-cubes" style="font-size: 80px;"></i>                    #}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="jumbotron">
+                    <p>
+                    </p>
+                    {#                    <p>  Have a look at the upcomming events.#}
+                    <div id="dashboard2"></div>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <script>
+            var locale = 'nl';
+        </script>
+        <script src="{{ asset('thom/dashy.js') }}"></script>
+        <script src="{{ asset('thom/index.js') }}"></script>
+    {% endblock %}
+    {% block javascripts %}
+        {#            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js" type="text/javascript"></script>#}
+
+    {% endblock %}    

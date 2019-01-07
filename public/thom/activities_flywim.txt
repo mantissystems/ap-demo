@@ -1,0 +1,4 @@
+activiteiten:
+mapping edit scherm maken
+insert mapping data in file aa_mapping
+insert availability in clubmemberavailability via eifadapter voor clubmember id=2
