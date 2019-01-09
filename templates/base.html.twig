@@ -10,11 +10,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>{% block title %}MANTIS BV{% endblock %}</title>
         <link rel="alternate" type="application/rss+xml" title="{{ 'rss.title'|trans }}" href="{{ path('blog_rss') }}">
+        
         {% block stylesheets %}
             {{ encore_entry_link_tags('css/app') }}
+                       <link rel="stylesheet" href="{{ asset('/scss/dashy.css') }}" />
         {% endblock %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        
+{#        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />#}
+
     </head>
 
     <body id="{% block body_id %}{% endblock %}"> 
@@ -123,7 +128,8 @@
                 </div>
             {% endblock %}
         </div>
-
+ <script src="{{ asset('build/js/app.js') }}"></script>        
+{#<script> src="{{ asset('build/js/app')}}"></script>#}
         {% block footer %}
             <footer>
                 <div class="container">
@@ -151,7 +157,12 @@
         {% endblock %}
 
         {% block javascripts %}
-            {{ encore_entry_script_tags('js/app') }}
+
+    <script src="{{ asset('/js/dashy.js') }}"></script>                           
+    <script src="{{ asset('/js/index.js') }}"></script>                           
+        <script src="{{ asset('/js/mantis.js') }}"></script>
+{#        <script src="{{ asset('/js/dashy.js') }}"></script>#}
+            {#{{ encore_entry_script_tags('entry1') }}#}
         {% endblock %}
 
         {# it's not mandatory to set the timezone in localizeddate(). This is done to

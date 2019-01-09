@@ -132,14 +132,21 @@ composer require league/csv:^8.0
 composer require symfony/finder
 composer require symfony/asset (weet niet zeker)
 composer require encore
+composer require symfony/webpack-encore-bundle
+composer require friendsofsymfony/jsrouting-bundle
 in base.html.twig
 in block javascript
-                        <script src="{{ asset('thom/dashy.js') }}"></script>
-                                    <script src="{{ asset('thom/index.js') }}"></script>
+				<script src="{{ asset('thom/dashy.js') }}"></script>
+				<script src="{{ asset('thom/index.js') }}"></script>
 
 in homepage.html.twig
-            <link rel="stylesheet" href="{{ asset('thom/css/dashy.css') }}">
-    <div id="dashboard"></div> (in block body)
+	<link rel="stylesheet" href="{{ asset('thom/css/dashy.css') }}">
+    
+	php bin/console fos:js-routing:debug
+	remark:put assetfiles in public or web for unrestricted access
+	
+	run php bin/console assets:install --symlink to install present assets in public/bundles
+	http://127.0.0.1:8000/nl/admin/post/new
 ===================================
 
   425  composer req var-dumper
@@ -244,4 +251,5 @@ default/homepage.html.twig
 
 public function templateAction(string $template, int $maxAge = null, int $sharedAge = null, bool $private = null): Response
 
+webpack.config.js
 ===================================

@@ -4,8 +4,12 @@
 
 {% block main %}
     <body>
-lksdjfsjf;lksdjf
-<script>helloWorld("world!")</script>
+{#lksdjfsjf;lksdjf===#}
+<div id="dashboard">
+    
+</div>
+      
+{#<script>helloWorld("world!")</script>#}
 </body>
     {% for post in posts %}
         <article class="post">
@@ -46,20 +50,16 @@ lksdjfsjf;lksdjf
 
 {% block javascripts %}
    {{ parent() }}
-       <script src="{{ asset('js/mantis.js') }}"></script>
-{#   <script src="js/dashy.js"></script>#}
-{#   <script>#}
-       
-{#          <script src="dashboard"></script>#}
-{#          <div id="dashboard"></div>#}
-{#       alert('hallo from blog');#}
-       {#dashy({
-           
-       })#}
-{#   </script>#}
+   <script>helloWorld("mantis says hello hello ")</script>
+
+
+{#   {{ encore_entry_script_tags('entry1') }}#}
+{#      <script>dashboard()</script>#}
+{#                           <script src="{{ asset('js/mantis.js') }}"></script>#}
+{#                           <script src="{{ asset('js/dashy.js') }}"></script>                           #}
 {% endblock %}
 
 {% block stylesheets %}
    {{ parent() }}
-    <link rel="stylesheet" href="js/dashy.css">
+           <link rel="stylesheet" href="{{ asset('scss/dashy.css') }}" />
 {% endblock %}
