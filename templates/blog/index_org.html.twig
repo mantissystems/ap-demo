@@ -42,11 +42,11 @@
 
 {% block javascripts %}
    {{ parent() }}
-                 alert('in index.html.twig');
-   <script src="/assets/js/dashy.js"></script>
+   <script src="js/dashy.js"></script>
    <script>
+{#          <script src="dashboard"></script>#}
 {#          <div id="dashboard"></div>#}
-       alert('hallo from index');
+{#       alert('hallo from blog');#}
        {#dashy({
            
        })#}
@@ -55,5 +55,5 @@
 
 {% block stylesheets %}
    {{ parent() }}
-    <link rel="stylesheet" href="/assets/scss/dashy.css">
+    <link rel="stylesheet" href="js/dashy.css">
 {% endblock %}

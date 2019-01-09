@@ -12,7 +12,7 @@ var dashy = (function () {
 //link.innerHTML = '<span class="dashy-icon"><i class="fa fa-' + item.icon + '"></i></span><span class="dashy-title">' +  item.title + '</span>';
 
         link.style.color = item.color;
-        console.log( item.url, '!' , link );
+//        console.log( item.url, '!' , link );
         return link;
     }
 
@@ -41,7 +41,7 @@ var dashy = (function () {
         if (el != null) {
         var inner = getDashy(options.items, options.menu, options.locale || 'nl');            
                     el.appendChild(inner);
-        console.log(inner);
+//        console.log(inner);
 }
 else {
     str = null;

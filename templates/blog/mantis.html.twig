@@ -4,13 +4,10 @@
 
 {% block main %}
     <body>
-{#lksdjfsjf;lksdjf===#}
-<div id="dashboard">
-    
-</div>
-      
-{#<script>helloWorld("world!")</script>#}
+
+          <div id="dashboard"></div>
 </body>
+{#          <div id="dashboard"></div>#}
     {% for post in posts %}
         <article class="post">
             <h2>
@@ -44,22 +41,20 @@
     {{ parent() }}
 
     {{ show_source_code(_self) }}
-{#        {{ dashboard(_self) }}#}
-{#    {{ include('blog/_rss.html.twig') }}#}
 {% endblock %}
 
 {% block javascripts %}
    {{ parent() }}
-   <script>helloWorld("mantis says hello hello ")</script>
-
-
-{#   {{ encore_entry_script_tags('entry1') }}#}
-{#      <script>dashboard()</script>#}
-{#                           <script src="{{ asset('js/mantis.js') }}"></script>#}
-{#                           <script src="{{ asset('js/dashy.js') }}"></script>                           #}
+                 alert('in mantis.html.twig');
+       <script src="{{ asset('/js/mantis.js') }}"></script>
+       <script src="{{ asset('/js/dashy.js') }}"></script>       
+              <script src="{{ asset('/js/index.js') }}"></script>
+ <script>
+{#       alert('hallo from mantis');#}
+   </script>
 {% endblock %}
 
 {% block stylesheets %}
    {{ parent() }}
-           <link rel="stylesheet" href="{{ asset('scss/dashy.css') }}" />
+    <link rel="stylesheet" href="/scss/dashy.css">
 {% endblock %}

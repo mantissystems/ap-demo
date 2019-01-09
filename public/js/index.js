@@ -12,20 +12,20 @@ dashy({
     }, {
         name: 'Maintenance apps',
         children: [
-            { title: 'Beginpagina', url: '/blog', icon: 'plug', color: 'orange' },
+            { title: 'Beginpagina', url: '/nl', icon: 'plug', color: 'orange' },
             { title: 'Beheerpaneel', url: '/nl/admin/post', icon: 'list', color: 'lightgreen' }
         ]
     }, {
         name: 'Data maintenance',
         children: [
-            { title: 'Adapter setup', url: '/blog', icon: 'cogs', color: 'green' },
+            { title: 'Adapter setup', url: '/nl/blog', icon: 'cogs', color: 'green' },
             { title: 'Cloud setup', url: '/nl/blog', icon: 'cloud', color: 'blue' },
-            { title: 'Blogwb', url: '/nl/blog', icon: 'compress', color: 'indigo' },
+            { title: 'Logout', url: '/nl/logout', icon: 'arrow-down', color: 'indigo' },
         ]
     }, {
         name: 'Registration',
         children: [
-            { title: 'Update ClubAction from Calendar', url: 'UpdateClubAction', icon: 'arrow-up', color: 'purple' }
+            { title: 'Login', url: '/nl/login', icon: 'arrow-up', color: 'purple' }
         ]
     }]
 });

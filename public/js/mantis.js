@@ -1,3 +1,3 @@
 function helloWorld(name) {
-//      console.log("mantis says again  " + name)
+   console.log("hello " + name);
 }
