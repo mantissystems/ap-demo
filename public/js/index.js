@@ -12,7 +12,7 @@ dashy({
     }, {
         name: 'Maintenance apps',
         children: [
-            { title: 'Applicatie', url: '/nl', icon: 'plug', color: 'orange' },
+            { title: 'Applicatie', url: '/nl/blog', icon: 'plug', color: 'orange' },
             { title: 'Beheerpaneel', url: '/nl/admin/post', icon: 'list', color: 'lightgreen' }
         ]
     }, {

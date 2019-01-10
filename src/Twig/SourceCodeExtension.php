@@ -114,6 +114,7 @@ class SourceCodeExtension extends AbstractExtension
     private function unindentCode(string $code): string
     {
         $formattedCode = $code;
+        dump($formattedCode);
         $codeLines = explode("\n", $code);
 
         $indentedLines = array_filter($codeLines, function ($lineOfCode) {
