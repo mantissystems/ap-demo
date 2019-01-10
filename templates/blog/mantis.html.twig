@@ -7,7 +7,7 @@
 
 {#          <div id="dashboard"></div>#}
 </body>
-          <div id="dashboard"></div>
+{#          <div id="dashboard"></div>#}
     {% for post in posts %}
         <article class="post">
             <h2>
@@ -40,7 +40,7 @@
 {% block sidebar %}
     {{ parent() }}
 
-    {{ show_source_code(_self) }}
+{#    {{ show_source_code(_self) }}#}
 {% endblock %}
 
 {% block javascripts %}

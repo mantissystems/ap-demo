@@ -147,6 +147,9 @@ in homepage.html.twig
 	
 	run php bin/console assets:install --symlink to install present assets in public/bundles
 	http://127.0.0.1:8000/nl/admin/post/new
+	
+	php bin/console fos:js-routing:dump --format=json --target=public/js/fos_js_routes.json
+	
 ===================================
 
   425  composer req var-dumper
