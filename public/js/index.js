@@ -7,7 +7,7 @@ dashy({
         name: 'Cloud apps',
         children: [
 //            { title: 'New Comment', url: '/nl/comment_new', icon: 'cloud-download', color: 'red' },
-            { title: 'New Post', url: '/nl/admin/post/new', icon: 'bar-chart', color: 'orange' },
+//            { title: 'New Post', url: '/nl/admin/post/new', icon: 'bar-chart', color: 'orange' },
         ]
     }, {
         name: 'Maintenance apps',

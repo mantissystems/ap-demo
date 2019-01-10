@@ -26,6 +26,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+//use app\src\Controller;
 
 /**
  * Controller used to manage blog contents in the public part of the site.

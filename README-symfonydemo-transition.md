@@ -119,6 +119,7 @@ cd symfony4
 ===================================
 composer dump-autoload
     composer req maker
+	php bin/console cache:clear
     php bin/console make:controller Import
 php bin/console make:controller Utilities
 php bin/console make:controller Matrix
