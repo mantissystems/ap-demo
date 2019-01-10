@@ -253,3 +253,32 @@ public function templateAction(string $template, int $maxAge = null, int $shared
 
 webpack.config.js
 ===================================
+in webpack.config.js
+	    .addEntry('js/mantis', './assets/js/dashy.js')
+		.addEntry('js/mantis', './assets/js/index.js')        
+in index.js
+    }, {
+        name: 'Maintenance apps',
+        children: [
+            { title: 'Beginpagina', url: '/nl', icon: 'plug', color: 'orange' },
+            { title: 'Beheerpaneel', url: '/nl/admin/post', icon: 'list', color: 'lightgreen' }
+        ]
+    }, {
+	in mantis.html.twig
+		
+{% block main %}
+    <body>
+          <div id="dashboard"></div>
+</body>
+
+{% block javascripts %}
+   {{ parent() }}
+       <script src="{{ asset('/js/mantis.js') }}"></script>
+       <script src="{{ asset('/js/dashy.js') }}"></script>       
+	  <script src="{{ asset('/js/index.js') }}"></script>
+{% endblock %}
+{% block stylesheets %}
+   {{ parent() }}
+	  <link rel="stylesheet" href="/scss/dashy.css">
+{% endblock %}
+
