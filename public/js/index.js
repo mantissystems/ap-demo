@@ -12,13 +12,13 @@ dashy({
     }, {
         name: 'Maintenance apps',
         children: [
-            { title: 'Applicatie', url: '/nl/blog', icon: 'plug', color: 'orange' },
+            { title: 'Applicatie', url: '/nl/blog   ', icon: 'plug', color: 'orange' },
             { title: 'Beheerpaneel', url: '/nl/admin/post', icon: 'list', color: 'lightgreen' }
         ]
     }, {
         name: 'Data maintenance',
         children: [
-//            { title: '', url: '/nl/blog', icon: 'cogs', color: 'green' },
+            { title: 'Adapter', url: '/nl/adapterimport', icon: 'cogs', color: 'green' },
 //            { title: '', url: '/nl/blog', icon: 'cloud', color: 'blue' },
             { title: 'Logout', url: '/nl/logout', icon: 'arrow-down', color: 'indigo' },
         ]

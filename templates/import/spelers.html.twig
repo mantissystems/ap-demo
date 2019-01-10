@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+        {% block body %}
+
+<h1> Players  </h1>
+		{{allplayers|length}} competitors
+
+      <table class="table table-striped">
+                    {% for h in headers %}
+          <th>{{h}}</th>
+          {% endfor %}
+                         
+              {% for speler in allplayers %}
+
+
+<tr><td>{{speler.id}}<td> {{speler.playername}} <td> {{speler.lottery}} <td> {{speler.gamerating}}</td><td>
+{#        <a class="btn btn-primary btn-lg" href="{{ path('admin') }}">#}
+{#<a class="btn btn-primary btn-lg" href="{{ path('testspelers', {'id': speler.id }) }}">Browse id</a>#}
+        </tr>
+
+ {% endfor %}
+   
+           
+          <tr>
+              
+
+</tr>
+</table> 
+		{% endblock %}
+     
+          
+               

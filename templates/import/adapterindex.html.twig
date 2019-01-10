@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1> Inbound Data Streams </h1>
+    {{loaded|length}} streams  in map {{dir}}
+
+    <table class="table table-striped">
+        {% for h in headers %}
+            <th>{{h}}</th>
+            {% endfor %}          
+
+
+        {% for file in loaded %}
+
+            <tr><td>{{file.id}}<td> {{file.sourcefile}} <td> {{file.destination}} <td> {{file.sourcecolumn}}<td>{{file.datalines}}</td><td>{{ file.loadedat|date('Y-m-d') }}</td><td><td>{{ file.randomizeable }}</td><td>
+                    {#<td><a class="btn btn-success" href="{{ path('uploads', {'id': file.mapid, 'test': file.destination}) }}">Load </a>#}
+{#                <td><a class="btn btn-success btn-sm" href="{{ path('uploads', {'id': file.id, 'dest': file.destination, 'cols': file.sourcecolumn, 'source': file.sourcefile }) }}">Load </a>    #}
+{#                <td><a class="btn btn-warning btn-sm" href="{{ path('remove', {'twigtable': file.destination, 'remove': file.destination}) }}">Purge </a>    #}
+                    {% if file.randomizeable==TRUE %}
+{#                    <td><a class="btn btn-info btn-sm" href="{{ path('randomize', {'twigtable': file.destination, 'table': file.destination}) }}">Randomise </a>    #}
+{#                    <td><a class="btn btn-primary btn-sm" href="{{ path('matrix_org', {'twigtable': file.destination, 'table': file.destination}) }}">Analise </a>    #}
+                    {% endif%}
+
+            </tr>
+
+        {% endfor %}
+
+        <tr>
+
+
+        </tr>
+    </table> 
+{% endblock %}
+
+
+
