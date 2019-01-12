@@ -17,6 +17,7 @@
         "sensiolabs/security-checker": "^5.0",
         "symfony/asset": "*",
         "symfony/expression-language": "*",
+        "symfony/filesystem": "4.2.*",
         "symfony/flex": "^1.1",
         "symfony/form": "*",
         "symfony/framework-bundle": "*",

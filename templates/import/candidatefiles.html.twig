@@ -17,10 +17,10 @@
                     {#<td><a class="btn btn-success" href="{{ path('uploads', {'id': file.mapid, 'test': file.destination}) }}">Load </a>#}
                 <td><a class="btn btn-success btn-sm" href="{{ path('uploads', {'id': file.id, 'dest': file.destination, 'cols': file.sourcecolumn, 'source': file.sourcefile }) }}">Load </a>    
 {#                <td><a class="btn btn-warning btn-sm" href="{{ path('remove', {'twigtable': file.destination, 'remove': file.destination}) }}">Purge </a>    #}
-                    {% if file.randomizeable==TRUE %}
+                   {# {% if file.randomizeable==TRUE %}
                     <td><a class="btn btn-info btn-sm" href="{{ path('randomize', {'twigtable': file.destination, 'table': file.destination}) }}">Randomise </a>    
                     <td><a class="btn btn-primary btn-sm" href="{{ path('matrix_org', {'twigtable': file.destination, 'table': file.destination}) }}">Analise </a>    
-                    {% endif%}
+                    {% endif%}#}
 
             </tr>
 

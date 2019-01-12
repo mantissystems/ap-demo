@@ -135,6 +135,8 @@ composer require symfony/asset (weet niet zeker)
 composer require encore
 composer require symfony/webpack-encore-bundle
 composer require friendsofsymfony/jsrouting-bundle
+composer require symfony/filesystem
+composer require symfony/translation //reinstall translations/messages
 in base.html.twig
 in block javascript
 				<script src="{{ asset('thom/dashy.js') }}"></script>

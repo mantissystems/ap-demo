@@ -18,8 +18,8 @@ dashy({
     }, {
         name: 'Data maintenance',
         children: [
-            { title: 'Adapter', url: '/nl/adapterimport', icon: 'cogs', color: 'green' },
-//            { title: '', url: '/nl/blog', icon: 'cloud', color: 'blue' },
+            { title: 'Adaptercheck', url: '/nl/adapterimport', icon: 'cogs', color: 'green' },
+            { title: 'Import', url: '/nl/Import', icon: 'cloud', color: 'blue' },
             { title: 'Logout', url: '/nl/logout', icon: 'arrow-down', color: 'indigo' },
         ]
     }, {
