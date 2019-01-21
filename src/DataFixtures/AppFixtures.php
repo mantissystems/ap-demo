@@ -79,7 +79,7 @@ class AppFixtures extends Fixture {
         $manager->flush();
     }
 
-    private function loadPosts(ObjectManager $manager) {
+    public function loadPosts(ObjectManager $manager) {
         foreach ($this->getPostData() as [$title, $slug, $summary, $content, $publishedAt, $author, $tags]) {
             $post = new Post();
             $post->setTitle($title);
@@ -242,7 +242,7 @@ MARKDOWN;
         $manager->persist($tag);
         $manager->flush();
     }
-        private function loadActionpost(ObjectManager $manager) {
+    public function loadActionpost(ObjectManager $manager) {
         foreach ($this->getPostData() as [$title, $slug, $summary, $content, $publishedAt, $author, $tags]) {
             $post = new Actionpost();
             $post->setTitle($title);

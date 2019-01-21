@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1> Inload-mapping </h1>
+    {{loaded|length}} 
+    {{dir}}
+
+    <table class="table table-striped">
+        {% for h in headers %}
+            <th><td><td>{{h}}</td></th>
+            {% endfor %}          
+</table> 
+<table class="table table-striped">
+
+    <tr>
+
+
+    </tr>
+{#    {% for source in csvfile %}#}
+        <div class="colour_container">
+            {% for p in loaded %}
+{#                {% if  p.source == source %}#}
+                    <tr><td> {{p.source}} <td> {{p.table_right}}<td>{{p.status}}<td>{{p.destination}}</td>
+                        <td><a class="btn btn-success btn-sm" href="{{ path('adapter_index', {  }) }}">Adapter </td> </a>    
+                    </tr>                
+{#                {% endif %}#}
+            {% endfor %}
+        </div>
+    
+{#{% endfor %}#}
+</table> 
+{% endblock %}
+
+
+

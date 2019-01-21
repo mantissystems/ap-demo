@@ -203,5 +203,17 @@ class Inloadfiles
         return $this;
     }
 
+    public function getLoadable(): ?bool
+    {
+        return $this->loadable;
+    }
+
+    public function setLoadable(?bool $loadable): self
+    {
+        $this->loadable = $loadable;
+
+        return $this;
+    }
+
 
 }

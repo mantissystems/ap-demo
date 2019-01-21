@@ -14,12 +14,24 @@ class Actionpost
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public $id;
 /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
+/**
+     * @var string
+     *
+     * @ORM\Column(name="author", type="string", length=255, nullable=true)
+     */
+    public $author;
+/**
+     * @var string
+     *
+     * 
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
+ */
     
         public $title;
 
@@ -29,34 +41,26 @@ class Actionpost
      * @ORM\Column(name="slug", type="string", length=255, nullable=true)
      */
         
-    private $slug;
+    public $slug;
     /**
      * @var string
      *
      * @ORM\Column(name="summary", type="string", length=255, nullable=true)
      */
-    private $summary;
+    public $summary;
     /**
      * @var string
      *
      * @ORM\Column(name="content", type="string", length=255, nullable=true)
      */
-    private $content;
+    public $content;
         /**
      * @var datetime
      *
      * @ORM\Column(name="publishedAt", type="datetime", length=255, nullable=true)
      */
-    private $publishedAt;
-/**
-     * @var integer
-     *
-     * @ORM\Column(name="author", type="integer", length=255, nullable=true)
-     */
-       
-    private $author;
- 
- 
+    public $publishedAt;
+    
    /**
      * @var string
      *
@@ -64,8 +68,8 @@ class Actionpost
      */
  
     
-    private $comments;
-//    private $tags;
+    public $comments;
+//    public $tags;
  
     public function getId(): ?int
     {
@@ -113,7 +117,7 @@ class Actionpost
     public function setAuthor(?User $author): void
     {
         //voor actionpost moet object user in appfixtures worden opgezet
-        $this->author = 1;//$author;
+        $this->author = $author;
     }
 
     public function getComments(): Collection
@@ -170,5 +174,10 @@ class Actionpost
     public function getTags(): Collection
     {
         return $this->tags;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
     }
 }

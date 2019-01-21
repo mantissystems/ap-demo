@@ -13,9 +13,9 @@
 
         {% for file in loaded %}
 
-            <tr><td>{{file.id}}<td> {{file.sourcefile}} <td> {{file.destination}} <td> {{file.sourcecolumn}}<td>{{file.datalines}}</td><td>{{ file.loadedat|date('Y-m-d') }}</td><td><td>{{ file.randomizeable }}</td><td>
-                    {#<td><a class="btn btn-success" href="{{ path('uploads', {'id': file.mapid, 'test': file.destination}) }}">Load </a>#}
-                <td><a class="btn btn-success btn-sm" href="{{ path('uploads', {'id': file.id, 'dest': file.destination, 'cols': file.sourcecolumn, 'source': file.sourcefile }) }}">Load </a>    
+            <tr><td>{{file.id}}<td> {{file.source}} <td> {{file.table_right}} <td> {{file.source_column}}<td>{{file.destination}}</td><td></td><td></td><td>
+                <td><a class="btn btn-success btn-sm" href="{{ path('uploads', { 'dest': file.table_right, 'cols': file.status, 'source': file.source }) }}">Load </a>    
+{#                <td><a class="btn btn-success btn-sm" href="{{ path('uploads', {'id': file.id, 'dest': file.table_right, 'cols': file.status, 'source': file.source }) }}">Load </a>    #}
 {#                <td><a class="btn btn-warning btn-sm" href="{{ path('remove', {'twigtable': file.destination, 'remove': file.destination}) }}">Purge </a>    #}
                    {# {% if file.randomizeable==TRUE %}
                     <td><a class="btn btn-info btn-sm" href="{{ path('randomize', {'twigtable': file.destination, 'table': file.destination}) }}">Randomise </a>    

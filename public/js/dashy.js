@@ -6,8 +6,9 @@ var dashy = (function () {
         var link = document.createElement('a');
         link.className = 'dashy-link';
         link.href = item.url;
-//               link.href = locale + item.url;
-//        console.log(locale, '!!', item.url, '!!' , link.href );
+//        console.log(link);
+               link.href = locale + item.url;
+        console.log(locale, '!!', item.url, '!!' , link.href );
         link.innerHTML = '<span class="dashy-icon"><i class="fa fa-' + item.icon + '"></i></span><span class="dashy-title">' +  item.title + '</span>';
 //link.innerHTML = '<span class="dashy-icon"><i class="fa fa-' + item.icon + '"></i></span><span class="dashy-title">' +  item.title + '</span>';
 
@@ -41,7 +42,7 @@ var dashy = (function () {
         if (el != null) {
         var inner = getDashy(options.items, options.menu, options.locale || 'nl');            
                     el.appendChild(inner);
-//        console.log(inner);
+        console.log(inner);
 }
 else {
     str = null;

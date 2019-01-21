@@ -6,26 +6,27 @@ dashy({
     items: [{
         name: 'Cloud apps',
         children: [
-//            { title: 'New Comment', url: '/nl/comment_new', icon: 'cloud-download', color: 'red' },
+            { title: 'Test', url: '/blog', icon: 'cloud-download', color: 'red' },
+//            { title: 'New Comment', url: '/nl/comment_new', icon: 'cloud-download', color: 'red' },            
 //            { title: 'New Post', url: '/nl/admin/post/new', icon: 'bar-chart', color: 'orange' },
         ]
     }, {
         name: 'Maintenance apps',
         children: [
-            { title: 'Applicatie', url: '/nl/blog   ', icon: 'plug', color: 'orange' },
-            { title: 'Beheerpaneel', url: '/nl/admin/post', icon: 'list', color: 'lightgreen' }
+            { title: 'Applicatie', url: '/blog   ', icon: 'plug', color: 'orange' },
+            { title: 'Beheerpaneel', url: '/admin/post', icon: 'list', color: 'lightgreen' }
         ]
     }, {
         name: 'Data maintenance',
         children: [
-            { title: 'Adaptercheck', url: '/nl/adapterimport', icon: 'cogs', color: 'green' },
-            { title: 'Import', url: '/nl/Import', icon: 'cloud', color: 'blue' },
-            { title: 'Logout', url: '/nl/logout', icon: 'arrow-down', color: 'indigo' },
+            { title: 'Adapterimport', url: '/adapterimport', icon: 'cogs', color: 'green' },
+            { title: 'Create Mapping', url: '/Import', icon: 'cloud', color: 'blue' },
+            { title: 'Logout', url: '/logout', icon: 'arrow-down', color: 'indigo' },
         ]
     }, {
         name: 'Registration',
         children: [
-            { title: 'Login', url: '/nl/login', icon: 'arrow-up', color: 'purple' }
+            { title: 'Login', url: '/login', icon: 'arrow-up', color: 'purple' }
         ]
     }]
 });
