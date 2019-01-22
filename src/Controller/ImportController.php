@@ -63,20 +63,21 @@ class ImportController extends AbstractController {
             $csvColumns = $reader->fetchOne();
             $csvrows = count($reader->fetchAll());
             $destination = str_replace('.csv', '', $source);
-
+//                $collumns = $em->getClassMetadata($entityprefix . ucwords($destination))->getColumnNames();
             try {
                 $collumns = $em->getClassMetadata($entityprefix . ucwords($destination))->getColumnNames();
             } catch (\Exception $e) {
+                $erroneous++;
                 if ($e instanceof MappingException || $e instanceof ORMException || $e instanceof EntityNotFoundException) {
                     
                 }
                 if ($e instanceof EntityNotFoundException) {
+                    $erroneous++;
                     throw $e;
                 }
             }
             try {
-                $collumns = $em->getClassMetadata($entityprefix . ucwords($destination))->getColumnNames();
-//                dump($collumns);
+//                $collumns = $em->getClassMetadata($entityprefix . ucwords($destination))->getColumnNames();
             } catch (\Exception $e) {
                 $erroneous++;
                 echo ' <font color="red">table-> ' . $destination . ' does not exist! Import will not be possible </font> ';
@@ -89,7 +90,7 @@ class ImportController extends AbstractController {
 //                $erroneous++;
                 error_log($e->getMessage());
             }
-            dump($erroneous);
+//            dump($erroneous);exit();
             if (!$erroneous > 0) {
                 $collumns = $em->getClassMetadata($entityprefix . ucwords($destination))->getColumnNames();
                 $files = $this->getDoctrine()->getRepository($entityprefix . ucwords($destination));
@@ -103,10 +104,14 @@ class ImportController extends AbstractController {
                 if (count($collumns) > 0) {
 //echo '<p class=text-success > OK ' . count($csvColumns) . ' present; ' . (count($collumns) - 1) . 'datacolumns needed in upload file <p class=text-success >' . $file->getRelativePathname() . ' <p <p class=text-success > in directory ' . $dir . '</p>';
                 }
+            } else {
+                $collumns = array();
+//                dump($collumns);exit();
             }
             $i = 0;
 //=====================================================
 //=====================================================        
+
             if (!empty($collumns)) {
                 foreach ($collumns as $value) {
                     $inloadmap = new inloadmapping();
@@ -123,6 +128,7 @@ class ImportController extends AbstractController {
                     $em->persist($inloadmap);
                 }
             }
+
             $em->flush();
 //=====================================================
 //=====================================================        
@@ -133,6 +139,7 @@ class ImportController extends AbstractController {
 //            $name = 'inloadmapping';
 //=====================================================
 //=====================================================        
+//            exit();
         $inloadmaping = $this->getDoctrine()->getRepository($entityprefix . $name);
         $mapped = $inloadmaping->findAll();
         $csvfile = array();
@@ -169,8 +176,8 @@ class ImportController extends AbstractController {
         $mapped = $em->getRepository($entityprefix . ucwords($name))->findAll([]);
         $files = $this->getDoctrine()->getRepository(inloadmapping::class);
 //        $wb = 0;
-//        $txt = 'ERROR';
-//        $mapped = $files->findBy(['source' => $txt,]);
+        $txt = 'ERROR';
+        $mapped = $files->findBy(['source' => $txt,]);
 //        echo $mapped;        exit();
 //        $finder->files()->in($dir);
 //        $finder->name('*.csv');
@@ -267,9 +274,14 @@ class ImportController extends AbstractController {
      */
     public function upload($dest, $source, Request $request) {
         $em = $this->getDoctrine()->getManager();
-        $wb = 'ERROR';
+//        $wb = 'ERROR';
+        $mappingtable = 'App:inloadmapping';
         $GLOBALS['destinationtable'] = $dest;
-        $query = $em->createQuery("SELECT DISTINCT e.source, e.table_right,e.stream_id,e.source_column, e.destination FROM App:inloadmapping e WHERE e.source != :wb ORDER BY e.source,e.table_right,e.source_column")->setParameter('wb', $wb);
+        $rsm = new ResultSetMapping();
+//                    $query = $em->createNativeQuery("INSERT INTO actionpost  (author,title,slug,summary,content,publishedat,comments) VALUES (? ,? , ?, ?, ?, ?, ?) ",$rsm);
+        $query = $em->createQuery("SELECT DISTINCT e.source, e.table_right,e.stream_id,e.source_column, e.destination FROM App:inloadmapping e WHERE e.source = :destination ORDER BY e.source,e.table_right,e.source_column", $rsm);
+        $query->setParameter('destination', $dest);
+//         $query->setParameter(2, $source);
         $distinct = $query->getResult();
         $s = count($distinct);
 
@@ -294,9 +306,12 @@ class ImportController extends AbstractController {
 //    $nameMetadata = $metadata->fieldMappings['author_id'];
 //    echo $nameMetadata['type'];  //print "string"
 //    echo $nameMetadata['length']; // print "150"
-
+//        $reader->setDelimiter(';');
         $cols = count($collumns);
         $reader = Reader::createFromPath('' . $dir . $source);
+//        $filecontent = $reader->fetchall();
+
+//        $reader->setDelimiter(';');
         $filecontent = $reader->fetchall();
         $x = count($filecontent) - 1;
         $y = $x * $cols;
@@ -308,42 +323,56 @@ class ImportController extends AbstractController {
         $key0 = array_search('id', $collumns); // $key = 0;
         $key1 = array_search('author', $collumns); // $key = 0;
         $key2 = array_search('comments', $collumns); // $key = 0;
-                $rsm = new ResultSetMapping();
+        $rsm = new ResultSetMapping();
+for ($k=0;$k<5;$k++){
+//        foreach ($filecontent as $line) {
+for ($j=0;$j<500;$j++){
+//    dump($filecontent[$j][1] );    
+//    dump($filecontent[$j][3] );    
+//    dump($filecontent[$j][5] );    
+//    dump($filecontent[$j][6] );    
+//    dump($filecontent[$j][7] );    
 
-        foreach ($filecontent as $line) {
-
-            $s5 = $GLOBALS['destinationtable'];
-            $entitytable = $entityprefix . $s5;
-            $desttable = new $entitytable();
-            foreach ($loaded as $value) {
-                $s6 = $value["source_column"]; //->source_column;
-                $col = $value["source_column"]; //->source_column;
-                $entitytable = $entityprefix . $s5;
-                $destination = $value["destination"]; //->destination;
-                $key20 = array_search($destination, $collumns); // $key = 0;
-                if (!$line[$key20] instanceof DateTime) {
-                    $field = $collumns[$key20];
-                    if (!empty($field) && !empty($line[$key20])) {
-                        $desttable->$field = $line[$key20];
-                    }
-                }
-            }
-        $title=$line[2];
-        $author=$line[3];
-        $title=$line[4];
-        $summary=$line[5];
-        $content=$line[6];
-        $publishedat=$line[7];
-        $comments=$line[8];        
-            $query = $em->createNativeQuery("INSERT INTO actionpost  (author,title,slug) VALUES (? ,? , ?) ",$rsm);
-        $query->setParameter(1, $author);
-        $query->setParameter(2, $title);
-//        $query->setParameter(3, $slug);        
-                $query->setParameter(4, $summary);
-                $result = $query->getResult();
-
-                }
-//        $items='64';
+//            $s5 = $GLOBALS['destinationtable'];
+//            $entitytable = $entityprefix . $s5;
+//            $desttable = new $entitytable();
+//            foreach ($loaded as $value) {
+//                $s6 = $value["source_column"]; //->source_column;
+//                $col = $value["source_column"]; //->source_column;
+//                $entitytable = $entityprefix . $s5;
+//                $destination = $value["destination"]; //->destination;
+//                $key20 = array_search($destination, $collumns); // $key = 0;
+//                if (!$line[$key20] instanceof DateTime) {
+//                    $field = $collumns[$key20];
+//                    if (!empty($field) && !empty($line[$key20])) {
+//                        $desttable->$field = $line[$key20];
+//                    }
+//                }
+//            }
+            $title = $filecontent[$j][1];//$line[1];
+            $slug =$filecontent[$j][3];// $line[3];
+//            $title = $line[4];
+            $summary = $filecontent[$j][5];//$line[5];
+//            $content = $line[6];
+            $publishedat = $filecontent[$j][7];//$line[6];
+                            if ($filecontent[$j][7] instanceof DateTime) {
+                            $publishedat = $filecontent[$j][7];//$line[6];
+                            }else{$publishedat='no date';}
+            $comments = $filecontent[$j][7];//$line[7];
+            $query = $em->createNativeQuery("INSERT INTO actionpost  (author,title,slug,summary,content,publishedat,comments) VALUES (? ,? , ?, ?, ?, ?, ?) ", $rsm);
+            $query->setParameter(1, $author);
+            $query->setParameter(2, $title);
+            $query->setParameter(3, $slug);
+            $query->setParameter(4, $title);
+//            $query->setParameter(5, $content);
+            $query->setParameter(4, $publishedat);
+            $query->setParameter(5, $comments);
+            $result = $query->getResult();
+        }
+//            $result = $query->getResult();
+}
+            echo '<p>KKKKK </p>';
+//            $result = $query->getResult();
 //        $rsm = new ResultSetMapping();
 //        $query = $em->createNativeQuery('INSERT INTO actionpost SET title = ?', $rsm);
 //$query = $em->createNativeQuery("INSERT INTO actionpost  (author,title) VALUES ('mantis','title') ",$rsm);
@@ -351,14 +380,6 @@ class ImportController extends AbstractController {
 //        $query->setParameter(1, $author);
 //        $query->setParameter(2, $title);
 //        $query->setParameter(3, $slug);        
-//$rsm = new ResultSetMapping();
-//$query = $this->_em->createNativeQuery('INSERT INTO Invoiceshasitems SET Invoiceitemsid = ?', $rsm);
-//$query->setParameter(1, $items);
-//
-//$result = $query->getResult();
-
-//        $result = $query->getResult();
-
 
 
         return $this->render('import/mapping.html.twig', compact('loaded', 'headers', 'dir'));
