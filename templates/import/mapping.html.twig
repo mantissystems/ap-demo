@@ -21,7 +21,7 @@
         <div class="colour_container">
             {% for p in loaded %}
 {#                {% if  p.source == source %}#}
-                    <tr><td> {{p.source}} <td> {{p.table_right}}<td>{{p.status}}<td>{{p.destination}}</td>
+                    <tr><td> {{p.source}} <td> {{p.table_right}}<td><td>{{p.destination}}</td>
                         <td><a class="btn btn-success btn-sm" href="{{ path('adapter_index', {  }) }}">Adapter </td> </a>    
                     </tr>                
 {#                {% endif %}#}

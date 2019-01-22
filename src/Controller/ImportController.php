@@ -20,6 +20,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Actionpost;
 use App\Entity\User;
 use App\Entity\inloadmapping;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 class ImportController extends AbstractController {
 
@@ -67,6 +68,7 @@ class ImportController extends AbstractController {
                 $collumns = $em->getClassMetadata($entityprefix . ucwords($destination))->getColumnNames();
             } catch (\Exception $e) {
                 if ($e instanceof MappingException || $e instanceof ORMException || $e instanceof EntityNotFoundException) {
+                    
                 }
                 if ($e instanceof EntityNotFoundException) {
                     throw $e;
@@ -76,18 +78,19 @@ class ImportController extends AbstractController {
                 $collumns = $em->getClassMetadata($entityprefix . ucwords($destination))->getColumnNames();
 //                dump($collumns);
             } catch (\Exception $e) {
-               $erroneous++;
+                $erroneous++;
                 echo ' <font color="red">table-> ' . $destination . ' does not exist! Import will not be possible </font> ';
 //                $erroneous++;
 
-                $error = $e->getMessage();           $erroneous++;
+                $error = $e->getMessage();
+                $erroneous++;
 
                 echo ' <font color="red">' . $error . '</font>';
 //                $erroneous++;
                 error_log($e->getMessage());
             }
             dump($erroneous);
-            if (!$erroneous>0) {
+            if (!$erroneous > 0) {
                 $collumns = $em->getClassMetadata($entityprefix . ucwords($destination))->getColumnNames();
                 $files = $this->getDoctrine()->getRepository($entityprefix . ucwords($destination));
                 $destination_table = $this->getDoctrine()->getRepository($entityprefix . ucwords($destination));
@@ -104,25 +107,27 @@ class ImportController extends AbstractController {
             $i = 0;
 //=====================================================
 //=====================================================        
-if( !empty($collumns)){
-            foreach ($collumns as $value) {
-                $inloadmap = new inloadmapping();
-                $inloadmap->stream_id = '01';
-                $inloadmap->table_right = $destination;
-                 $inloadmap->source = $source;
-                if ($erroneous >0) {
-                $inloadmap->source = 'ERROR';
+            if (!empty($collumns)) {
+                foreach ($collumns as $value) {
+                    $inloadmap = new inloadmapping();
+                    $inloadmap->stream_id = '01';
+                    $inloadmap->table_right = $destination;
+                    $inloadmap->source = $source;
+                    if ($erroneous > 0) {
+                        $inloadmap->source = 'ERROR';
+                    }
+                    $inloadmap->status = $i;
+                    $inloadmap->source_column = $i;
+                    $inloadmap->destination = $value;
+                    $i++;
+                    $em->persist($inloadmap);
                 }
-                $inloadmap->status = $i;
-                $inloadmap->source_column = $i;
-                $inloadmap->destination = $value;
-                $i++;
-                $em->persist($inloadmap);
-        }}
+            }
             $em->flush();
 //=====================================================
 //=====================================================        
-        $erroneous=0; }
+            $erroneous = 0;
+        }
         $em->flush();
         dump($name);
 //            $name = 'inloadmapping';
@@ -177,10 +182,10 @@ if( !empty($collumns)){
             $inload->stream_id = '0';
             $inload->loadable = FALSE;
 //            if ($inload->sourcefile !== 'ERROR') {
-                $inload->loadable = TRUE;
-                $source = $file->source;
+            $inload->loadable = TRUE;
+            $source = $file->sourcefile;
 //            }
-            $inload->source = $file->source;
+            $inload->source = $file->sourcefile;
             $em->persist($inload);
         }
         $em->flush();
@@ -199,7 +204,7 @@ if( !empty($collumns)){
 //            $mapping= $em->getRepository(inloadmapping::class)->findBy(['source' => $source,]);
 //            $author = $manager->getRepository(User::class)->findOneBy(['id' => $id,]);
 //        $mapping=null;
-        $mapping = $mappings;//->findAll();
+        $mapping = $mappings; //->findAll();
         $i = 1;
         if (strpos($platformname, 'sqlite', 0) > 0) {
             echo '<p>SQLITE </p>';
@@ -217,35 +222,35 @@ if( !empty($collumns)){
 //        dump($mapping);exit();
             foreach ($mapping as $map) {
 //        dump($map,$mapping);exit();
-                
-            $source = $map->source;
-            if($source!='ERROR'){
+
+                $source = $map->source;
+                if ($source != 'ERROR') {
 //                break;
-                
-            
-            $destination = $map->table_right; //str_replace('.csv', '', $source);
-            $reader = Reader::createFromPath($dir . $source);
-            $csvColumns = $reader->fetchOne();
-            $csvrows = count($reader->fetchAll());
-            $collumns = $em->getClassMetadata($entityprefix . ucwords($destination))->getColumnNames();
+
+
+                    $destination = $map->table_right; //str_replace('.csv', '', $source);
+                    $reader = Reader::createFromPath($dir . $source);
+                    $csvColumns = $reader->fetchOne();
+                    $csvrows = count($reader->fetchAll());
+                    $collumns = $em->getClassMetadata($entityprefix . ucwords($destination))->getColumnNames();
 //            dump($csvColumns);
-            $inload = new Inloadfiles();
-            $inload->MapId = '';
-            $inload->sourcefile = $source;
-            $inload->destination = $destination;
-            $inload->sourcecolumn = count($collumns) - 1;
+                    $inload = new Inloadfiles();
+                    $inload->MapId = '';
+                    $inload->sourcefile = $source;
+                    $inload->destination = $destination;
+                    $inload->sourcecolumn = count($collumns) - 1;
 //                if (array_search('id', $collumns, true)) {
 //                    $inload->sourcecolumn = count($collumns) - 2;
 //                }
-            $inload->destinationfield = count($collumns);
-            $inload->datalines = $csvrows;
-            $inload->randomizeable = FALSE;
-            if (array_search('lottery', $collumns, true)) {
-                $inload->randomizeable = TRUE;
-            }
-            $em->persist($inload);
-            $em->flush();
-            }
+                    $inload->destinationfield = count($collumns);
+                    $inload->datalines = $csvrows;
+                    $inload->randomizeable = FALSE;
+                    if (array_search('lottery', $collumns, true)) {
+                        $inload->randomizeable = TRUE;
+                    }
+                    $em->persist($inload);
+                    $em->flush();
+                }
 //                                                                dump($inload);exit();
             }
             $em->flush();
@@ -303,8 +308,10 @@ if( !empty($collumns)){
         $key0 = array_search('id', $collumns); // $key = 0;
         $key1 = array_search('author', $collumns); // $key = 0;
         $key2 = array_search('comments', $collumns); // $key = 0;
+                $rsm = new ResultSetMapping();
+
         foreach ($filecontent as $line) {
-            $wb = 0;
+
             $s5 = $GLOBALS['destinationtable'];
             $entitytable = $entityprefix . $s5;
             $desttable = new $entitytable();
@@ -313,24 +320,48 @@ if( !empty($collumns)){
                 $col = $value["source_column"]; //->source_column;
                 $entitytable = $entityprefix . $s5;
                 $destination = $value["destination"]; //->destination;
-                $key20 = $wb; 
-//array_search($destination, $collumns); // $key = 0;
-
-//                $keywb = '';
+                $key20 = array_search($destination, $collumns); // $key = 0;
                 if (!$line[$key20] instanceof DateTime) {
                     $field = $collumns[$key20];
                     if (!empty($field) && !empty($line[$key20])) {
                         $desttable->$field = $line[$key20];
                     }
                 }
-                $wb++;
-if($wb>$col){break;}
             }
-        }
+        $title=$line[2];
+        $author=$line[3];
+        $title=$line[4];
+        $summary=$line[5];
+        $content=$line[6];
+        $publishedat=$line[7];
+        $comments=$line[8];        
+            $query = $em->createNativeQuery("INSERT INTO actionpost  (author,title,slug) VALUES (? ,? , ?) ",$rsm);
+        $query->setParameter(1, $author);
+        $query->setParameter(2, $title);
+//        $query->setParameter(3, $slug);        
+                $query->setParameter(4, $summary);
+                $result = $query->getResult();
+
+                }
+//        $items='64';
+//        $rsm = new ResultSetMapping();
+//        $query = $em->createNativeQuery('INSERT INTO actionpost SET title = ?', $rsm);
+//$query = $em->createNativeQuery("INSERT INTO actionpost  (author,title) VALUES ('mantis','title') ",$rsm);
+//$query = $em->createNativeQuery("INSERT INTO actionpost  (author,title,slug) VALUES (? ,? , ?) ",$rsm);
+//        $query->setParameter(1, $author);
+//        $query->setParameter(2, $title);
+//        $query->setParameter(3, $slug);        
+//$rsm = new ResultSetMapping();
+//$query = $this->_em->createNativeQuery('INSERT INTO Invoiceshasitems SET Invoiceitemsid = ?', $rsm);
+//$query->setParameter(1, $items);
+//
+//$result = $query->getResult();
+
+//        $result = $query->getResult();
 
 
 
-        return $this->render('import/mapping.html.twig', compact('loaded', 'headers',dir'));
+        return $this->render('import/mapping.html.twig', compact('loaded', 'headers', 'dir'));
     }
 
     public function datumcheck($test) {
