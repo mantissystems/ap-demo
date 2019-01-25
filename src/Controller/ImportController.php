@@ -353,6 +353,7 @@ for ($j=0;$j<500;$j++){
             $slug =$filecontent[$j][3];// $line[3];
 //            $title = $line[4];
             $summary = $filecontent[$j][5];//$line[5];
+            dump($filecontent[$j][5]);
 //            $content = $line[6];
             $publishedat = $filecontent[$j][7];//$line[6];
                             if ($filecontent[$j][7] instanceof DateTime) {
